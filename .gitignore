@@ -226,3 +226,7 @@ packages/
 
 #Secret values
 Secrets.txt
+
+#New stuff
+.vs/
+project.lock.json
