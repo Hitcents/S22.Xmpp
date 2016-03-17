@@ -2,6 +2,7 @@
 using Sharp.Xmpp.Client;
 using Sharp.Xmpp.Im;
 using System;
+using System.IO;
 
 namespace XmppConsole
 {
@@ -11,7 +12,9 @@ namespace XmppConsole
         {
             try
             {
-                using (var client = new XmppClient(args[0], args[1], args[2]))
+                string[] secrets = File.ReadAllText("Secrets.txt").Split(',');
+
+                using (var client = new XmppClient(secrets[0], secrets[1], secrets[2]))
                 {
                     client.Connect();
                     client.SetStatus(Availability.Online);
@@ -23,7 +26,7 @@ namespace XmppConsole
                     string line;
                     while ((line = Console.ReadLine()) != null)
                     {
-                        Jid to = new Jid("something.com", "someone");
+                        Jid to = new Jid(secrets[0], secrets[3]);
                         client.SendMessage(to, line, type: MessageType.Chat);
                     }
 
