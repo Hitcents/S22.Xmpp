@@ -49,9 +49,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\S22.Xmpp.csproj">
-      <Project>{9ea99e39-8c5c-4f69-9f3f-8e3074c518fa}</Project>
-      <Name>S22.Xmpp</Name>
+    <ProjectReference Include="..\Sharp.Xmpp.csproj">
+      <Project>{5d198eef-b6e5-4e09-b5ac-b03938923181}</Project>
+      <Name>Sharp.Xmpp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

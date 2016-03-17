@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9EA99E39-8C5C-4F69-9F3F-8E3074C518FA}</ProjectGuid>
+    <ProjectGuid>{5D198EEF-B6E5-4E09-B5AC-B03938923181}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sharp.Xmpp</RootNamespace>
@@ -225,13 +225,6 @@
     <Content Include="Client\Examples.xml">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="License.md" />
-    <None Include="packages.config" />
-    <None Include="Readme.md" />
-    <None Include="ReleaseNotes.md" />
-    <None Include="UPNPLib" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
