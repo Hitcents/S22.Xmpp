@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Sockets.Plugin;
+using System;
+using System.Net;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
 
 namespace Sharp.Xmpp.Extensions.Socks5
@@ -17,17 +17,17 @@ namespace Sharp.Xmpp.Extensions.Socks5
         /// <summary>
         /// The underlying TCP listener.
         /// </summary>
-        private TcpListener listener;
+        private TcpSocketListener listener;
 
         /// <summary>
         /// The client connection.
         /// </summary>
-        private TcpClient client;
+        private TcpSocketClient client;
 
         /// <summary>
         /// The underlying network-stream instance.
         /// </summary>
-        private NetworkStream stream;
+        private Stream stream;
 
         /// <summary>
         /// Determines whether the instance has been disposed.
@@ -129,7 +129,7 @@ namespace Sharp.Xmpp.Extensions.Socks5
         /// <returns>The underlying NetworkStream.</returns>
         /// <exception cref="ObjectDisposedException">The object has been
         /// disposed.</exception>
-        public NetworkStream GetStream()
+        public Stream GetStream()
         {
             AssertValid();
             return stream;
@@ -149,7 +149,7 @@ namespace Sharp.Xmpp.Extensions.Socks5
         {
             if (localaddress == null)
                 localaddress = IPAddress.Any;
-            listener = new TcpListener(localaddress, port);
+            listener = new TcpSocketListener(localaddress, port);
             listener.Start();
             Port = port;
         }

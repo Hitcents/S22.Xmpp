@@ -1,5 +1,6 @@
 ﻿using ARSoft.Tools.Net.Dns;
 using Sharp.Xmpp.Core.Sasl;
+using Sockets.Plugin;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -7,8 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Security;
-using System.Net.Sockets;
-using System.Security.Authentication;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace Sharp.Xmpp.Core
         /// <summary>
         /// The TCP connection to the XMPP server.
         /// </summary>
-        private TcpClient client;
+        private TcpSocketClient client;
 
         /// <summary>
         /// The (network) stream used for sending and receiving XML data.
@@ -471,7 +470,7 @@ namespace Sharp.Xmpp.Core
             this.resource = resource;
             try
             {
-                client = new TcpClient(Hostname, Port);
+                client = new TcpSocketClient(Hostname, Port);
                 stream = client.GetStream();
                 // Sets up the connection which includes TLS and possibly SASL negotiation.
                 SetupConnection(this.resource);
@@ -919,7 +918,7 @@ namespace Sharp.Xmpp.Core
             {
                 // TLS is mandatory and user opted out of it.
                 if (feats["starttls"]["required"] != null && Tls == false)
-                    throw new AuthenticationException("The server requires TLS/SSL.");
+                    throw new Exception("The server requires TLS/SSL.");
                 if (Tls)
                     feats = StartTls(Hostname, Validate);
             }
@@ -929,7 +928,7 @@ namespace Sharp.Xmpp.Core
             // Construct a list of SASL mechanisms supported by the server.
             var m = feats["mechanisms"];
             if (m == null || !m.HasChildNodes)
-                throw new AuthenticationException("No SASL mechanisms advertised.");
+                throw new Exception("No SASL mechanisms advertised.");
             var mech = m.FirstChild;
             var list = new HashSet<string>();
             while (mech != null)
@@ -948,7 +947,7 @@ namespace Sharp.Xmpp.Core
             }
             catch (SaslException e)
             {
-                throw new AuthenticationException("Authentication failed.", e);
+                throw new Exception("Authentication failed.", e);
             }
         }
 
