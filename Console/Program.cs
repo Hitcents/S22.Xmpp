@@ -15,9 +15,11 @@ namespace XmppConsole
         {
             try
             {
-                using (var client = new XmppClient("something.com", "someone", "password"))
+                using (var client = new XmppClient(args[0], args[1], args[2]))
                 {
                     client.Connect();
+                    client.SetStatus(Availability.Online);
+
                     client.Message += OnMessage;
 
                     Console.WriteLine("Connected as " + client.Jid);
@@ -28,6 +30,8 @@ namespace XmppConsole
                         Jid to = new Jid("something.com", "someone");
                         client.SendMessage(to, line, type: MessageType.Chat);
                     }
+
+                    client.SetStatus(Availability.Offline);
                 }
             }
             catch (Exception exc)
