@@ -1,13 +1,12 @@
-﻿using S22.Xmpp.Im;
-using System;
-using System.Collections.Generic;
+﻿#if WINDOWSPLATFORM
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Security.Cryptography;
-using System.Xml;
+#endif
 
-namespace S22.Xmpp.Extensions {
+namespace Sharp.Xmpp.Extensions
+{
+#if WINDOWSPLATFORM
+
 	/// <summary>
 	/// Implements the 'User Avatar' extension as defined in XEP-0084.
 	/// </summary>
@@ -263,4 +262,5 @@ namespace S22.Xmpp.Extensions {
 			}
 		}
 	}
+#endif
 }

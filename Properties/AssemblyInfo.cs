@@ -1,21 +1,20 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
+// General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("S22.Xmpp")]
-[assembly: AssemblyDescription("A library for communicating with an XMPP server")]
+[assembly: AssemblyTitle("Sharp.Xmpp")]
+[assembly: AssemblyDescription("Sharp.Xmpp is a multiplatform, Windows and Android, .NET XMPP client assembly. Sharp.Xmpp supports IM functionality and a variety of XMPP extensions, is simple and is extensively tested against Android Xamarin. It is a fork of the currently frozen excellent S22.Xmpp project.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("S22.Xmpp")]
-[assembly: AssemblyCopyright("Copyright © Torben Könke 2013")]
+[assembly: AssemblyCompany("PGStath")]
+[assembly: AssemblyProduct("Sharp.Xmpp")]
+[assembly: AssemblyCopyright("Sharp.Xmpp Panagiotis Georgiou Stathopoulos 2015, S22.Xmpp Torben Könke 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
+// Setting ComVisible to false makes the types in this assembly not visible
+// to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
@@ -25,12 +24,12 @@ using System.Runtime.InteropServices;
 // VersionInformation information for an assembly consists of the following four values:
 //
 //      Major VersionInformation
-//      Minor VersionInformation 
+//      Minor VersionInformation
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
+// You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.2.2")]
+[assembly: AssemblyFileVersion("1.0.2.2")]

@@ -7,8 +7,8 @@
     <ProjectGuid>{9EA99E39-8C5C-4F69-9F3F-8E3074C518FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>S22.Xmpp</RootNamespace>
-    <AssemblyName>S22.Xmpp</AssemblyName>
+    <RootNamespace>Sharp.Xmpp</RootNamespace>
+    <AssemblyName>Sharp.Xmpp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,10 +17,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\S22.Xmpp.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Sharp.Xmpp.xml</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,11 +30,34 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>bin\Debug\Sharp.Xmpp.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ARSoft.Tools.Net, Version=1.8.1.0, Culture=neutral, PublicKeyToken=1940454cd762ec57, processorArchitecture=MSIL">
+      <HintPath>packages\ARSoft.Tools.Net.1.8.1\lib\ARSoft.Tools.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +68,8 @@
     <Compile Include="Client\FileTransferSettings.cs" />
     <Compile Include="Client\XmppClient.cs" />
     <Compile Include="Core\ErrorEventArgs.cs" />
+    <Compile Include="Extensions\CustomExtension\CustomIqExtension.cs" />
+    <Compile Include="Extensions\CustomExtension\CustomIqRequestDelegate.cs" />
     <Compile Include="Extensions\XEP-0004\DataForms.cs" />
     <Compile Include="Extensions\XEP-0004\Dataforms\BooleanField.cs" />
     <Compile Include="Extensions\XEP-0004\Dataforms\CancelForm.cs" />
@@ -95,13 +121,13 @@
     <Compile Include="Extensions\XEP-0065\UPnP\UPnP.cs" />
     <Compile Include="Extensions\XEP-0077\InBandRegistration.cs" />
     <Compile Include="Extensions\XEP-0077\RegistrationCallback.cs" />
+    <Compile Include="Extensions\XEP-0084\AvatarChangedEventArgs.cs" />
+    <Compile Include="Extensions\XEP-0084\UserAvatar.cs" />
     <Compile Include="Extensions\XEP-0085\ChatState.cs" />
     <Compile Include="Extensions\XEP-0085\ChatStateChangedEventArgs.cs" />
     <Compile Include="Extensions\XEP-0085\ChatStateNotifications.cs" />
     <Compile Include="Extensions\XEP-0096\BytesTransferredEventArgs.cs" />
     <Compile Include="Extensions\XEP-0047\InBandBytestreams.cs" />
-    <Compile Include="Extensions\XEP-0084\AvatarChangedEventArgs.cs" />
-    <Compile Include="Extensions\XEP-0084\UserAvatar.cs" />
     <Compile Include="Extensions\XEP-0095\InitiationResult.cs" />
     <Compile Include="Extensions\XEP-0095\StreamInitiation.cs" />
     <Compile Include="Extensions\XEP-0096\FileMetaData.cs" />
@@ -123,11 +149,14 @@
     <Compile Include="Extensions\XEP-0118\TuneEventArgs.cs" />
     <Compile Include="Extensions\XEP-0118\TuneInformation.cs" />
     <Compile Include="Extensions\XEP-0118\UserTune.cs" />
+    <Compile Include="Extensions\XEP-0153\vCardAvatars.cs" />
     <Compile Include="Extensions\XEP-0163\Pep.cs" />
     <Compile Include="Extensions\XEP-0231\BitsOfBinary.cs" />
     <Compile Include="Extensions\XEP-0231\BobData.cs" />
     <Compile Include="Extensions\XEP-0279\ServerIpCheck.cs" />
+    <Compile Include="Extensions\XEP-0280\MessageCarbons.cs" />
     <Compile Include="Im\SubscriptionRequest.cs" />
+    <Compile Include="XmppDisconnectionException.cs" />
     <Compile Include="XmppExceptions.cs" />
     <Compile Include="ErrorCondition.cs" />
     <Compile Include="ErrorType.cs" />
@@ -193,19 +222,18 @@
     <Compile Include="XmppErrorException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="UPNPLib">
-      <Guid>{DB3442A7-A2E9-4A59-9CB5-F5C1A5D901E5}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <Content Include="Client\Examples.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\Examples.xml" />
+    <None Include="License.md" />
+    <None Include="packages.config" />
+    <None Include="Readme.md" />
+    <None Include="ReleaseNotes.md" />
+    <None Include="UPNPLib" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

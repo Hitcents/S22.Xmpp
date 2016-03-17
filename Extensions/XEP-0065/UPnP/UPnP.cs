@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Sockets;
-using System.Runtime.InteropServices;
+﻿#if WINDOWSPLATFORM
 using UPNPLib;
+#endif
 
-namespace S22.Xmpp.Extensions.Upnp {
+namespace Sharp.Xmpp.Extensions.Upnp
+{
+#if WINDOWSPLATFORM
+
 	/// <summary>
 	/// Provides static methods for retrieving the external IP address from UPnP-enabled
 	/// routers as well as methods for managing automatic port-forwarding.
@@ -344,17 +344,17 @@ namespace S22.Xmpp.Extensions.Upnp {
 		/// until the search has been completed.</param>
 		/// <returns>An enumerable collection of discovered UPnP devices.</returns>
 		/// <exception cref="InvalidOperationException">An error occurred while
-		/// performing an SSDP search-operation.</exception> 
+		/// performing an SSDP search-operation.</exception>
 		/// <remarks>
 		/// A full UPnP search can take 9 seconds or longer;
-		/// 
+		///
 		/// Possible values for the searchTarget parameter include:
 		///  * ssdp:all (searches for all devices and services)
-		///  * ssdp:rootdevice (searches for root devices only) 
+		///  * ssdp:rootdevice (searches for root devices only)
 		/// For details on all possible values for the searchTarget parameter, refer
 		/// to the 'UPnP Device Architecture 1.1' document, page 33.
 		/// </remarks>
-		static IEnumerable<UPnPDevice> FindDevices(string searchTarget = null,
+        static IEnumerable<UPnPDevice> FindDevices(string searchTarget = null,
 			TimeSpan? timeout = null) {
 			UPnPDeviceFinder deviceFinder = new UPnPDeviceFinder();
 			DeviceFinderCallback dfCallback = new DeviceFinderCallback();
@@ -377,4 +377,5 @@ namespace S22.Xmpp.Extensions.Upnp {
 			return dfCallback.Devices;
 		}
 	}
+#endif
 }
