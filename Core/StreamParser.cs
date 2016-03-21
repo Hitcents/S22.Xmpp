@@ -101,8 +101,7 @@ namespace Sharp.Xmpp.Core
                 string xml = inner.ReadOuterXml();
                 XmlDocument doc = new XmlDocument();
                 using (var sr = new StringReader(xml))
-                using (var xtr = new XmlTextReader(sr))
-                    doc.Load(xtr);
+                    doc.Load(sr);
                 XmlElement elem = (XmlElement)doc.FirstChild;
                 // Handle unrecoverable stream errors.
                 if (elem.Name == "stream:error")
@@ -132,7 +131,7 @@ namespace Sharp.Xmpp.Core
         /// </summary>
         public void Dispose()
         {
-            reader.Close();
+            reader.Dispose();
             if (!leaveOpen)
                 stream.Close();
         }

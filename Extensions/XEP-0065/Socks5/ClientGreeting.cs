@@ -8,7 +8,6 @@ namespace Sharp.Xmpp.Extensions.Socks5
     /// <summary>
     /// Represents a SOCKS5 client-greeting message.
     /// </summary>
-    [Serializable]
     internal class ClientGreeting
     {
         /// <summary>

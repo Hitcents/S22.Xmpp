@@ -10,7 +10,6 @@ namespace Sharp.Xmpp.Extensions.Socks5
     /// <summary>
     /// Represents a SOCKS5 request message.
     /// </summary>
-    [Serializable]
     internal class SocksRequest
     {
         /// <summary>

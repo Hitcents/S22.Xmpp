@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Represents an item of an XMPP entity as defined in XEP-0030.
     /// </summary>
-    [Serializable]
     internal class Item
     {
         /// <summary>

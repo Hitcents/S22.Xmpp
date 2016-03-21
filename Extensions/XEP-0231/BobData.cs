@@ -9,7 +9,6 @@ namespace Sharp.Xmpp.Extensions
     /// Represents a piece of binary data in the context of the 'Bits of Binary'
     /// extension.
     /// </summary>
-    [Serializable]
     internal class BobData
     {
         /// <summary>

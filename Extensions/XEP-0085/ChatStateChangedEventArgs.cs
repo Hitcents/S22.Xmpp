@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Provides data for the ChatStateChanged event.
     /// </summary>
-    [Serializable]
     public class ChatStateChangedEventArgs : EventArgs
     {
         /// <summary>

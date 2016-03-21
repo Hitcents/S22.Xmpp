@@ -22,7 +22,7 @@ namespace Sharp.Xmpp.Extensions.Socks5
         /// <summary>
         /// The underlying network-stream instance.
         /// </summary>
-        private NetworkStream stream;
+        private Stream stream;
 
         /// <summary>
         /// Determines whether the instance has been disposed.
@@ -139,7 +139,7 @@ namespace Sharp.Xmpp.Extensions.Socks5
         /// <returns>The underlying NetworkStream.</returns>
         /// <exception cref="ObjectDisposedException">The object has been
         /// disposed.</exception>
-        public NetworkStream GetStream()
+        public Stream GetStream()
         {
             AssertValid();
             return stream;

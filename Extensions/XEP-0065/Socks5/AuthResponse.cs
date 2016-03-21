@@ -7,7 +7,6 @@ namespace Sharp.Xmpp.Extensions.Socks5
     /// <summary>
     /// Represents a SOCKS5 Username/Password auth-response message.
     /// </summary>
-    [Serializable]
     internal class AuthResponse
     {
         /// <summary>

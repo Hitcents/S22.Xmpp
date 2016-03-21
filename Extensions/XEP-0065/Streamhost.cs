@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Represents a streamhost entry as is used during S5B negotiation.
     /// </summary>
-    [Serializable]
     public class Streamhost
     {
         /// <summary>

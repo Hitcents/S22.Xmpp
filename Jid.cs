@@ -7,7 +7,6 @@ namespace Sharp.Xmpp
     /// <summary>
     /// Represents the address of an XMPP entity, also known as Jabber Identifier (JID).
     /// </summary>
-    [Serializable]
     public sealed class Jid
     {
         /// <summary>

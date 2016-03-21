@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Represents meta-data of a file.
     /// </summary>
-    [Serializable]
     internal class FileMetaData
     {
         /// <summary>

@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Provides information about the music to which a user is listening.
     /// </summary>
-    [Serializable]
     public class TuneInformation
     {
         /// <summary>

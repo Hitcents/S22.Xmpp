@@ -6,7 +6,6 @@ namespace Sharp.Xmpp.Extensions.Socks5
     /// <summary>
     /// The exception that is thrown when a SOCKS5 error has been encountered.
     /// </summary>
-    [Serializable()]
     internal class Socks5Exception : Exception
     {
         /// <summary>

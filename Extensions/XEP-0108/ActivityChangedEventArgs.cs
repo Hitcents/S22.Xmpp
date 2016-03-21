@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Provides data for the ActivityChanged event.
     /// </summary>
-    [Serializable]
     public class ActivityChangedEventArgs : EventArgs
     {
         /// <summary>

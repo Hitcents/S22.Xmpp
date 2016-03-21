@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Provides data for the 'FileTransferAborted' event.
     /// </summary>
-    [Serializable]
     public class FileTransferAbortedEventArgs : EventArgs
     {
         /// <summary>

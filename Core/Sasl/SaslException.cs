@@ -6,7 +6,6 @@ namespace Sharp.Xmpp.Core.Sasl
     /// <summary>
     /// The exception is thrown when a Sasl-related error or unexpected condition occurs.
     /// </summary>
-    [Serializable()]
     internal class SaslException : Exception
     {
         /// <summary>

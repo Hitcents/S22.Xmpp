@@ -8,7 +8,6 @@ namespace Sharp.Xmpp.Im
     /// <summary>
     /// Provides status information for a contact.
     /// </summary>
-    [Serializable]
     public class Status
     {
         /// <summary>

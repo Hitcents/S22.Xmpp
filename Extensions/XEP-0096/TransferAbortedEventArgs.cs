@@ -6,7 +6,6 @@ namespace Sharp.Xmpp.Extensions
     /// Provides data for the 'TransferAborted' event which is raised by
     /// IDataStream implementations.
     /// </summary>
-    [Serializable]
     internal class TransferAbortedEventArgs : EventArgs
     {
         /// <summary>

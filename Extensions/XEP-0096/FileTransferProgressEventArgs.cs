@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Provides data for the 'FileTransferProgress' event.
     /// </summary>
-    [Serializable]
     public class FileTransferProgressEventArgs : EventArgs
     {
         /// <summary>

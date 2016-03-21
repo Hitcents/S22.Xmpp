@@ -6,7 +6,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Represents an SI session as is negotiated during stream initiation.
     /// </summary>
-    [Serializable]
     internal class SISession
     {
         /// <summary>

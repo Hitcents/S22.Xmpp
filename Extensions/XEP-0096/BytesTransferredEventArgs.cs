@@ -6,7 +6,6 @@ namespace Sharp.Xmpp.Extensions
     /// Provides data for the 'BytesTransferred' event which is raised by
     /// IDataStream implementations.
     /// </summary>
-    [Serializable]
     internal class BytesTransferredEventArgs : EventArgs
     {
         /// <summary>

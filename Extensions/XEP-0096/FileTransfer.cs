@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Represents an on-going file-transfer operation.
     /// </summary>
-    [Serializable]
     public class FileTransfer
     {
         /// <summary>

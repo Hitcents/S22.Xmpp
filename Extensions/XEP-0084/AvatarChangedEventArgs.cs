@@ -9,7 +9,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Provides data for the AvatarChanged event.
     /// </summary>
-    [Serializable]
     public class AvatarChangedEventArgs : EventArgs
     {
 #if WINDOWSPLATFORM

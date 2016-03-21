@@ -5,7 +5,6 @@ namespace Sharp.Xmpp.Extensions
     /// <summary>
     /// Provides data for the Tune event.
     /// </summary>
-    [Serializable]
     public class TuneEventArgs : EventArgs
     {
         /// <summary>

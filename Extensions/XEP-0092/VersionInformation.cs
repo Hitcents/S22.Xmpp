@@ -6,7 +6,6 @@ namespace Sharp.Xmpp.Extensions
     /// Provides information about the software application associated with an
     /// XMPP entity.
     /// </summary>
-    [Serializable]
     public class VersionInformation
     {
         /// <summary>

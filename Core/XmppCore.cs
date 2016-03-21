@@ -919,7 +919,7 @@ namespace Sharp.Xmpp.Core
             {
                 // TLS is mandatory and user opted out of it.
                 if (feats["starttls"]["required"] != null && Tls == false)
-                    throw new AuthenticationException("The server requires TLS/SSL.");
+                    throw new Exception("The server requires TLS/SSL.");
                 if (Tls)
                     feats = StartTls(Hostname, Validate);
             }
@@ -929,7 +929,7 @@ namespace Sharp.Xmpp.Core
             // Construct a list of SASL mechanisms supported by the server.
             var m = feats["mechanisms"];
             if (m == null || !m.HasChildNodes)
-                throw new AuthenticationException("No SASL mechanisms advertised.");
+                throw new Exception("No SASL mechanisms advertised.");
             var mech = m.FirstChild;
             var list = new HashSet<string>();
             while (mech != null)
@@ -948,7 +948,7 @@ namespace Sharp.Xmpp.Core
             }
             catch (SaslException e)
             {
-                throw new AuthenticationException("Authentication failed.", e);
+                throw new Exception("Authentication failed.", e);
             }
         }
 
