@@ -226,3 +226,6 @@ packages/
 
 #Secret values
 Secrets.txt
+
+#New stuff
+.vs/
