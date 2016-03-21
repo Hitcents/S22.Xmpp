@@ -17,7 +17,7 @@ namespace XmppConsole
                 using (var client = new XmppClient(secrets[0], secrets[1], secrets[2]))
                 {
                     client.Connect();
-                    client.SetStatus(Availability.Online);
+                    client.SetStatus(Availability.Chat);
 
                     client.Message += OnMessage;
 
