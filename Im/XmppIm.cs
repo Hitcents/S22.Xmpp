@@ -126,6 +126,7 @@ namespace Sharp.Xmpp.Im
             }
         }
 
+#if !NETFX_CORE
         /// <summary>
         /// A delegate used for verifying the remote Secure Sockets Layer (SSL)
         /// certificate which is used for authentication.
@@ -142,6 +143,7 @@ namespace Sharp.Xmpp.Im
                 core.Validate = value;
             }
         }
+#endif
 
         /// <summary>
         /// Determines whether the session with the server is TLS/SSL encrypted.
@@ -299,9 +301,17 @@ namespace Sharp.Xmpp.Im
         /// <exception cref="ArgumentOutOfRangeException">The value of the port parameter
         /// is not a valid port number.</exception>
         public XmppIm(string hostname, string username, string password,
-            int port = 5222, bool tls = true, RemoteCertificateValidationCallback validate = null)
+            int port = 5222, bool tls = true
+#if !NETFX_CORE
+            , RemoteCertificateValidationCallback validate = null
+#endif
+            )
         {
+#if !NETFX_CORE
             core = new XmppCore(hostname, username, password, port, tls, validate);
+#else
+            core = new XmppCore(hostname, username, password, port, tls);
+#endif
             SetupEventHandlers();
         }
 
@@ -321,10 +331,17 @@ namespace Sharp.Xmpp.Im
         /// string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The value of the port parameter
         /// is not a valid port number.</exception>
-        public XmppIm(string hostname, int port = 5222, bool tls = true,
-            RemoteCertificateValidationCallback validate = null)
+        public XmppIm(string hostname, int port = 5222, bool tls = true
+            #if !NETFX_CORE
+            , RemoteCertificateValidationCallback validate = null
+            #endif
+            )
         {
+#if !NETFX_CORE
             core = new XmppCore(hostname, port, tls, validate);
+#else
+            core = new XmppCore(hostname, port, tls);
+#endif
             SetupEventHandlers();
         }
 

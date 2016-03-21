@@ -244,6 +244,7 @@ namespace Sharp.Xmpp.Core
             set;
         }
 
+#if !NETFX_CORE
         /// <summary>
         /// A delegate used for verifying the remote Secure Sockets Layer (SSL)
         /// certificate which is used for authentication.
@@ -253,6 +254,7 @@ namespace Sharp.Xmpp.Core
             get;
             set;
         }
+#endif
 
         /// <summary>
         /// Determines whether the session with the server is TLS/SSL encrypted.
@@ -339,7 +341,11 @@ namespace Sharp.Xmpp.Core
         /// <exception cref="ArgumentOutOfRangeException">The value of the port parameter
         /// is not a valid port number.</exception>
         public XmppCore(string hostname, string username, string password,
-            int port = 5222, bool tls = true, RemoteCertificateValidationCallback validate = null)
+            int port = 5222, bool tls = true
+#if !NETFX_CORE
+            , RemoteCertificateValidationCallback validate = null
+#endif
+            )
         {
             moveNextSrvDNS(hostname);
             if (dnsCurrent != null)
@@ -355,7 +361,9 @@ namespace Sharp.Xmpp.Core
             Username = username;
             Password = password;
             Tls = tls;
+#if !NETFX_CORE
             Validate = validate;
+#endif
         }
 
         /// <summary>
@@ -374,8 +382,11 @@ namespace Sharp.Xmpp.Core
         /// string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The value of the port parameter
         /// is not a valid port number.</exception>
-        public XmppCore(string hostname, int port = 5222, bool tls = true,
-            RemoteCertificateValidationCallback validate = null)
+        public XmppCore(string hostname, int port = 5222, bool tls = true
+#if !NETFX_CORE
+            , RemoteCertificateValidationCallback validate = null
+#endif
+            )
         {
             moveNextSrvDNS(hostname);
             if (dnsCurrent != null)
@@ -389,7 +400,9 @@ namespace Sharp.Xmpp.Core
                 Port = port;
             }
             Tls = tls;
+#if !NETFX_CORE
             Validate = validate;
+#endif
         }
 
         /// <summary>
@@ -1002,8 +1015,11 @@ namespace Sharp.Xmpp.Core
         /// XML-stream in it's 'xml:lang' attribute could not be found.</exception>
         /// <exception cref="IOException">There was a failure while writing to the
         /// network, or there was a failure while reading from the network.</exception>
-        private XmlElement StartTls(string hostname,
-            RemoteCertificateValidationCallback validate)
+        private XmlElement StartTls(string hostname
+#if !NETFX_CORE
+            , RemoteCertificateValidationCallback validate
+#endif
+            )
         {
             // Send STARTTLS command and ensure the server acknowledges the request.
             SendAndReceive(Xml.Element("starttls",

@@ -238,6 +238,7 @@ namespace Sharp.Xmpp.Client
             }
         }
 
+#if !NETFX_CORE
         /// <summary>
         /// A delegate used for verifying the remote Secure Sockets Layer (SSL)
         /// certificate which is used for authentication.
@@ -254,6 +255,7 @@ namespace Sharp.Xmpp.Client
                 im.Validate = value;
             }
         }
+#endif
 
         /// <summary>
         /// Determines whether the session with the server is TLS/SSL encrypted.
@@ -600,9 +602,17 @@ namespace Sharp.Xmpp.Client
         /// <remarks>Use this constructor if you wish to connect to an XMPP server using
         /// an existing set of user credentials.</remarks>
         public XmppClient(string hostname, string username, string password,
-            int port = 5222, bool tls = true, RemoteCertificateValidationCallback validate = null)
+            int port = 5222, bool tls = true
+#if !NETFX_CORE
+            , RemoteCertificateValidationCallback validate = null
+#endif
+            )
         {
+#if !NETFX_CORE
             im = new XmppIm(hostname, username, password, port, tls, validate);
+#else
+            im = new XmppIm(hostname, username, password, port, tls);
+#endif
             // Initialize the various extension modules.
             LoadExtensions();
         }
@@ -625,10 +635,17 @@ namespace Sharp.Xmpp.Client
         /// is not a valid port number.</exception>
         /// <remarks>Use this constructor if you wish to register an XMPP account using
         /// the in-band account registration process supported by some servers.</remarks>
-        public XmppClient(string hostname, int port = 5222, bool tls = true,
-            RemoteCertificateValidationCallback validate = null)
+        public XmppClient(string hostname, int port = 5222, bool tls = true
+#if !NETFX_CORE
+            , RemoteCertificateValidationCallback validate = null
+#endif
+            )
         {
+#if !NETFX_CORE
             im = new XmppIm(hostname, port, tls, validate);
+#else
+            im = new XmppIm(hostname, port, tls);
+#endif
             LoadExtensions();
         }
 
