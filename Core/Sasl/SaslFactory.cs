@@ -58,11 +58,6 @@ namespace Sharp.Xmpp.Core.Sasl
         {
             name.ThrowIfNull("name");
             t.ThrowIfNull("t");
-            if (!t.IsSubclassOf(typeof(SaslMechanism)))
-            {
-                throw new ArgumentException("The type t must be a subclass " +
-                    "of Sasl.SaslMechanism");
-            }
             try
             {
                 Mechanisms.Add(name, t);
@@ -79,7 +74,7 @@ namespace Sharp.Xmpp.Core.Sasl
         static SaslFactory()
         {
             Mechanisms = new Dictionary<string, Type>(
-                StringComparer.InvariantCultureIgnoreCase);
+                StringComparer.OrdinalIgnoreCase);
 
             // Could be moved to App.config to support SASL "plug-in" mechanisms.
             var list = new Dictionary<string, Type>() {

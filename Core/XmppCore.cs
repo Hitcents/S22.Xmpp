@@ -443,13 +443,6 @@ namespace Sharp.Xmpp.Core
                     if (srvRecord != null)
                     {
                         tempList.Add(srvRecord);
-                        Console.WriteLine(srvRecord.ToString());
-                        Console.WriteLine("  |--- Name " + srvRecord.Name);
-                        Console.WriteLine("  |--- Port: " + srvRecord.Port);
-                        Console.WriteLine("  |--- Priority" + srvRecord.Priority);
-                        Console.WriteLine("  |--- Type " + srvRecord.RecordType);
-                        Console.WriteLine("  |--- Target: " + srvRecord.Target);
-                        Console.WriteLine();
                     }
                 }
                 dnsRecordList = tempList.OrderBy(o => o.Priority).ThenBy(order => order.Weight).ToList();
@@ -934,7 +927,11 @@ namespace Sharp.Xmpp.Core
                 if (feats["starttls"]["required"] != null && Tls == false)
                     throw new Exception("The server requires TLS/SSL.");
                 if (Tls)
+#if !NETFX_CORE
                     feats = StartTls(Hostname, Validate);
+#else
+                    feats = StartTls(Hostname);
+#endif
             }
             // If no Username has been provided, don't perform authentication.
             if (Username == null)
@@ -1025,8 +1022,11 @@ namespace Sharp.Xmpp.Core
             SendAndReceive(Xml.Element("starttls",
                 "urn:ietf:params:xml:ns:xmpp-tls"), "proceed");
             // Complete TLS negotiation and switch to secure stream.
-            SslStream sslStream = new SslStream(stream, false, validate ??
-                ((sender, cert, chain, err) => true));
+            SslStream sslStream = new SslStream(stream, false
+#if !NETFX_CORE
+                , validate ?? ((sender, cert, chain, err) => true)
+#endif
+            );
             sslStream.AuthenticateAsClient(hostname);
             stream = sslStream;
             IsEncrypted = true;
@@ -1106,7 +1106,7 @@ namespace Sharp.Xmpp.Core
             string[] m = new string[] { "SCRAM-SHA-1", "DIGEST-MD5", "PLAIN" };
             for (int i = 0; i < m.Length; i++)
             {
-                if (mechanisms.Contains(m[i], StringComparer.InvariantCultureIgnoreCase))
+                if (mechanisms.Contains(m[i], StringComparer.OrdinalIgnoreCase))
                     return m[i];
             }
             throw new SaslException("No supported SASL mechanism found.");

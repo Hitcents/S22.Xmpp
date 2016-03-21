@@ -133,7 +133,7 @@ namespace Sharp.Xmpp.Core
         {
             reader.Dispose();
             if (!leaveOpen)
-                stream.Close();
+                stream.Dispose();
         }
 
         /// <summary>

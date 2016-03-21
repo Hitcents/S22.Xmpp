@@ -131,14 +131,17 @@ namespace Sharp.Xmpp.Extensions
             : base(im)
         {
             // Collect name and version attributes from the assembly's metadata.
-            Attribute attr = Assembly.GetExecutingAssembly().
-                GetCustomAttribute(typeof(AssemblyProductAttribute));
+            var assembly = GetType().GetTypeInfo().Assembly;
+            Attribute attr = assembly.GetCustomAttribute(typeof(AssemblyProductAttribute));
             string name = attr != null ? ((AssemblyProductAttribute)attr).Product :
                 "Sharp.Xmpp";
-            string version = Assembly.GetExecutingAssembly().GetName().
-                Version.ToString();
+            string version = assembly.GetName().Version.ToString();
             Version = new VersionInformation(name, version,
+#if NETFX_CORE
+                "Windows 10");
+#else
                 Environment.OSVersion.ToString());
+#endif
         }
     }
 }

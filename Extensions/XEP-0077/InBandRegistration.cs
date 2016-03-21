@@ -19,11 +19,6 @@ namespace Sharp.Xmpp.Extensions
         private EntityCapabilities ecapa;
 
         /// <summary>
-        /// A reference to the 'Bits of Binary' extension instance.
-        /// </summary>
-        private BitsOfBinary bob;
-
-        /// <summary>
         /// An enumerable collection of XMPP namespaces the extension implements.
         /// </summary>
         /// <remarks>This is used for compiling the list of supported extensions
@@ -54,7 +49,6 @@ namespace Sharp.Xmpp.Extensions
         public override void Initialize()
         {
             ecapa = im.GetExtension<EntityCapabilities>();
-            bob = im.GetExtension<BitsOfBinary>();
         }
 
         /// <summary>

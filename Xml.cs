@@ -92,8 +92,7 @@ namespace Sharp.Xmpp
                 if (a.Name == "xmlns")
                     continue;
                 if (a.Value != null)
-                    b.Append(" " + a.Name + "='" + SecurityElement.Escape(a.Value.ToString())
-                        + "'");
+                    b.Append(" " + a.Name + "='" + string.Empty.PadLeft(a.Value.Length, '*') + "'");
             }
             if (e.IsEmpty)
                 b.Append("/>");

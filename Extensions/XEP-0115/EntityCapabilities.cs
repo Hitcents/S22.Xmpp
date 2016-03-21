@@ -288,7 +288,7 @@ namespace Sharp.Xmpp.Extensions
         {
             algorithm.ThrowIfNull("algorithm");
             var dict = new Dictionary<string, Func<HashAlgorithm>>
-                (StringComparer.InvariantCultureIgnoreCase) {
+                (StringComparer.OrdinalIgnoreCase) {
 				{ "sha-1",   () => new SHA1Managed() },
 				{ "sha-256", () => new SHA256Managed() },
 				{ "sha-384", () => new SHA384Managed() },

@@ -216,8 +216,6 @@ namespace Sharp.Xmpp
             struct, IComparable, IFormattable, IConvertible
         {
             value.ThrowIfNull("value");
-            if (!typeof(T).IsEnum)
-                throw new ArgumentException("T must be an enumerated type.");
             return (T)Enum.Parse(typeof(T), value, ignoreCase);
         }
     }
