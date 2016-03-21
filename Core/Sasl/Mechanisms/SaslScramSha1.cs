@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -199,7 +199,7 @@ namespace Sharp.Xmpp.Core.Sasl.Mechanisms
         /// response.</returns>
         private byte[] ComputeFinalResponse(byte[] challenge)
         {
-            NameValueCollection nv = ParseServerFirstMessage(challenge);
+            var nv = ParseServerFirstMessage(challenge);
             // Extract the server data needed to calculate the client proof.
             string salt = nv["s"], nonce = nv["r"];
             int iterationCount = Int32.Parse(nv["i"]);
@@ -272,11 +272,11 @@ namespace Sharp.Xmpp.Core.Sasl.Mechanisms
         /// the server message.</returns>
         /// <exception cref="ArgumentNullException">The message parameter
         /// is null.</exception>
-        private NameValueCollection ParseServerFirstMessage(byte[] challenge)
+        private Dictionary<string, string> ParseServerFirstMessage(byte[] challenge)
         {
             challenge.ThrowIfNull("challenge");
             string message = Encoding.UTF8.GetString(challenge);
-            NameValueCollection coll = new NameValueCollection();
+            var coll = new Dictionary<string, string>();
             foreach (string s in message.Split(','))
             {
                 int delimiter = s.IndexOf('=');

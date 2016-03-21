@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -170,7 +170,7 @@ namespace Sharp.Xmpp.Core.Sasl.Mechanisms
             }
             // Parse the challenge-string and construct the "response-value" from it.
             string decoded = Encoding.ASCII.GetString(challenge);
-            NameValueCollection fields = ParseDigestChallenge(decoded);
+            var fields = ParseDigestChallenge(decoded);
             string digestUri = "xmpp/" + fields["realm"];
             string responseValue = ComputeDigestResponseValue(fields, Cnonce, digestUri,
                 Username, Password);
@@ -205,10 +205,10 @@ namespace Sharp.Xmpp.Core.Sasl.Mechanisms
         /// is null.</exception>
         /// <remarks>Refer to RFC 2831 section 2.1.1 for a detailed description of the
         /// format of the challenge sent by the server.</remarks>
-        private static NameValueCollection ParseDigestChallenge(string challenge)
+        private static Dictionary<string, string> ParseDigestChallenge(string challenge)
         {
             challenge.ThrowIfNull("challenge");
-            NameValueCollection coll = new NameValueCollection();
+            var coll = new Dictionary<string, string>();
             string[] parts = challenge.Split(',');
             foreach (string p in parts)
             {
@@ -237,7 +237,7 @@ namespace Sharp.Xmpp.Core.Sasl.Mechanisms
         /// response sent by the client.</returns>
         /// <remarks>Refer to RFC 2831, section 2.1.2.1 for a detailed
         /// description of the computation of the response-value.</remarks>
-        private static string ComputeDigestResponseValue(NameValueCollection challenge,
+        private static string ComputeDigestResponseValue(Dictionary<string, string> challenge,
             string cnonce, string digestUri, string username, string password)
         {
             // The username, realm and password are encoded with ISO-8859-1
