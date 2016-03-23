@@ -1336,7 +1336,7 @@ namespace Sharp.Xmpp.Im
         /// connected to a remote host.</exception>
         /// <exception cref="ObjectDisposedException">The XmppIm object has been
         /// disposed.</exception>
-        internal void SendPresence(Presence presence)
+        public void SendPresence(Presence presence)
         {
             presence.ThrowIfNull("presence");
             // Invoke IOutput<Presence> Plugins.
@@ -1706,7 +1706,9 @@ namespace Sharp.Xmpp.Im
                 string l = element.GetAttribute("xml:lang");
                 if (String.IsNullOrEmpty(l))
                     l = lang;
-                dict.Add(l, element.InnerText);
+                //TODO: jon did this because I was able to get a status back that jacked this up, maybe it's fine?
+                if (!dict.ContainsKey(l))
+                    dict.Add(l, element.InnerText);
             }
             Status status = new Status(availability, dict, prio);
             // Raise Status event.
